@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+<div id="fullarticle" contenteditable="false">
+  <p>Some text</p>
+  <span class="math-tex">
+    <span>\(x =  (\sqrt{7}-\dfrac{1}{\sqrt{7}})^2\)</span>
+    <span>\(x =  (\sqrt{7}-\dfrac{1}{\sqrt{7}})^2\)</span>
+  </span>
+  <p>Some more text</p>
+</div>
+<button class="edit">Edit</button>
+<button class="save">Save</button>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">	</script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js"></script>
+<script type="text/javascript">
+$(".edit").click(function() {
+  $(".math-tex").each(function(index) {
+    $(this).html("\\(" + $(this).find("script").html() + "\\)");
+  });
+  $("#fullarticle").attr("contenteditable", "true");
+  CKEDITOR.inline('fullarticle');
+});
+
+$(".save").click(function() {
+  $("#fullarticle").attr("contenteditable", "false");
+
+  for (k in CKEDITOR.instances) {
+    var instance = CKEDITOR.instances[k];
+    instance.destroy();
+  }
+
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+});
+</script>
+</html>

@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form>
+{{ form.media }}
+{{ form.as_p }}
+<input type="submit"/>
+</form>
+<form>
+	<div id="val">sdsd</div>
+</form>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script>
+	$(document).ready(function () {
+		// $("#val").val("There is preview");
+		alert("value: " + $("#val").val())
+	})
+</script>
+</body>
+
+
+</html>
